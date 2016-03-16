@@ -1287,6 +1287,13 @@ static int futex_requeue(u32 __user *uaddr1, unsigned int flags,
 	struct futex_q *this, *next;
 
 	if (requeue_pi) {
+ 		/*
+		 * requeue pi only works on two distinct uaddrs.
+                 * This check is only valid for private futexes.
+		 */
+		if (uaddr1 == uaddr2)
+			return -EINVAL;
+            
 		/*
 		 * Requeue PI only works on two distinct uaddrs. This
 		 * check is only valid for private futexes. See below.
@@ -1327,6 +1334,7 @@ retry:
 	ret = get_futex_key(uaddr1, flags & FLAGS_SHARED, &key1, VERIFY_READ);
 	if (unlikely(ret != 0))
 		goto out;
+
 	ret = get_futex_key(uaddr2, flags & FLAGS_SHARED, &key2,
 			    requeue_pi ? VERIFY_WRITE : VERIFY_READ);
 	if (unlikely(ret != 0))

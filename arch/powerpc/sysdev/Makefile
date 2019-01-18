@@ -1,4 +1,4 @@
-subdir-ccflags-$(CONFIG_PPC_WERROR) := -Werror
+subdir-ccflags-$(CONFIG_PPC_WERROR) := -Wno-error
 
 ccflags-$(CONFIG_PPC64)		:= -mno-minimal-toc
 
@@ -61,6 +61,6 @@ endif
 
 obj-$(CONFIG_PPC_SCOM)		+= scom.o
 
-subdir-ccflags-$(CONFIG_PPC_WERROR) := -Werror
+subdir-ccflags-$(CONFIG_PPC_WERROR) := -Wno-error
 
 obj-$(CONFIG_PPC_XICS)		+= xics/

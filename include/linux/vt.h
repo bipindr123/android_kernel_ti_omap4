@@ -1,12 +1,16 @@
 #ifndef _LINUX_VT_H
 #define _LINUX_VT_H
 
+
 /*
- * These constants are also useful for user-level apps (e.g., VC resizing).
+ * These constants are also useful for user-level apps (e.g., VC
+ * resizing).
  */
-#define MIN_NR_CONSOLES        1   /* must be at least 1 */
-#define MAX_NR_CONSOLES	      11   /* serial lines start at 64 */
-#define MAX_NR_USER_CONSOLES  11   /* must be root to allocate above this */
+#define MIN_NR_CONSOLES 1       /* must be at least 1 */
+#define MAX_NR_CONSOLES	63	/* serial lines start at 64 */
+#define MAX_NR_USER_CONSOLES 63	/* must be root to allocate above this */
+		/* Note: the ioctl VT_GETSTATE does not work for
+		   consoles 16 and higher (since it returns a short) */
 
 /* 0x56 is 'V', to avoid collision with termios and kd */
 
@@ -21,9 +25,9 @@ struct vt_mode {
 };
 #define VT_GETMODE	0x5601	/* get mode of active vt */
 #define VT_SETMODE	0x5602	/* set mode of active vt */
-#define	VT_AUTO		0x00	/* auto vt switching */
-#define	VT_PROCESS	0x01	/* process controls switching */
-#define	VT_ACKACQ	0x02	/* acknowledge switch */
+#define		VT_AUTO		0x00	/* auto vt switching */
+#define		VT_PROCESS	0x01	/* process controls switching */
+#define		VT_ACKACQ	0x02	/* acknowledge switch */
 
 struct vt_stat {
 	unsigned short v_active;	/* active vt */

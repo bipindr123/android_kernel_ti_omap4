@@ -739,10 +739,6 @@ out_state:
 	p = futex_find_get_task(pid);
 	if (!p)
 		return -ESRCH;
-	if (!p->mm) {
-		put_task_struct(p);
-		return -EPERM;
-	}
 
 	/*
 	 * We need to look at the task state flags to figure out,

@@ -126,6 +126,13 @@ config CPU_FREQ_DEFAULT_GOV_LULZACTIVE
 	  system by simply loading your cpufreq hardware driver, using
 	  'lulzactive' governor for higer latency-sensitive workloads.
 
+config CPU_FREQ_DEFAULT_GOV_DARKNESS
+	bool "darkness"
+	select CPU_FREQ_GOV_DARKNESS
+	help
+	  Use the CPUFreq governor 'darkness' as default.
+
+
 config CPU_FREQ_DEFAULT_GOV_HOTPLUG
 	bool "hotplug"
 	select CPU_FREQ_GOV_HOTPLUG
@@ -270,6 +277,16 @@ config CPU_FREQ_GOV_LULZACTIVE
 	   module will be called cpufreq_lulzactive.
 
 	   If in doubt, say N.
+
+config CPU_FREQ_GOV_DARKNESS
+	tristate "'darkness' cpufreq policy governor"
+	depends on CPU_FREQ
+	help
+	  'darkness' - This driver is a rather simple implementation of a timer
+	  based governor.
+
+	  If in doubt, say N.
+
 
 config CPU_INPUT_BOOST
 	bool "CPU Input Boost"
